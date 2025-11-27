@@ -1,0 +1,257 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(8px + 1.5vmin);
+  color: white;
+  padding: 10px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.player-tile {
+  border-radius: 4px;
+  padding: 5px;
+  margin: 2px;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 150px;
+  text-align: left;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.player-tile:hover {
+  opacity: 0.8;
+}
+
+.player-tile.gk {
+  background-color: #4a90e2;
+  border: 1px solid #4a90e2;
+}
+
+.player-tile.def {
+  background-color: #4caf50;
+  border: 1px solid #4caf50;
+}
+
+.player-tile.cen {
+  background-color: #ff9800;
+  border: 1px solid #ff9800;
+}
+
+.player-tile.att {
+  background-color: #f44336;
+  border: 1px solid #f44336;
+}
+
+.team-list, .gk-teams {
+  background-color: #3a3a3a;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+  min-width: 250px;
+}
+
+.team-gk {
+  background-color: #4a4a4a;
+  border: 1px solid #61dafb;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.team-gk:hover, .team-gk.selected {
+  border-color: #21a1f1;
+  background-color: #5a5a5a;
+}
+
+.top-gk {
+  font-size: 14px;
+  color: #61dafb;
+}
+
+.sortable-player, .sortable-bet, .sortable-role, .sortable-team {
+  margin: 5px 0;
+}
+
+.bet-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.bet-input button {
+  background-color: #61dafb;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.bet-input button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.bet-value {
+  width: 60px;
+  text-align: center;
+  border: 1px solid #61dafb;
+  border-radius: 4px;
+  background-color: #282c34;
+  color: white;
+  padding: 5px;
+  display: inline-block;
+  cursor: grab;
+}
+
+.role-tile {
+  width: 40px;
+  text-align: center;
+  border: 1px solid #61dafb;
+  border-radius: 4px;
+  background-color: #282c34;
+  color: white;
+  padding: 5px;
+  display: inline-block;
+  cursor: grab;
+}
+
+.team-tile {
+  border: 1px solid #4a90e2;
+  border-radius: 4px;
+  background-color: #4a90e2;
+  color: white;
+  padding: 5px;
+  margin: 2px;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.team-tile:hover {
+  opacity: 0.8;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.player-sections {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.selection-sections {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.selection-list {
+  background-color: #3a3a3a;
+  border-radius: 8px;
+  padding: 5px;
+  min-width: 150px;
+}
+
+.selection-list.gk {
+  border: 2px solid #4a90e2;
+}
+
+.selection-list.def {
+  border: 2px solid #4caf50;
+}
+
+.selection-list.cen {
+  border: 2px solid #ff9800;
+}
+
+.selection-list.att {
+  border: 2px solid #f44336;
+}
+
+.selected-player {
+  background-color: #61dafb;
+  border-radius: 4px;
+  padding: 5px;
+  margin: 5px 0;
+  color: #282c34;
+}
+
+.controls {
+  margin: 20px 0;
+}
+
+button {
+  background-color: #61dafb;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  color: #282c34;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+button:hover {
+  background-color: #21a1f1;
+}
+
+h2, h3, h4 {
+  color: #61dafb;
+  font-size: 14px;
+}
+
+.total {
+  font-size: 18px;
+  font-weight: bold;
+  color: #61dafb;
+  margin-top: 10px;
+}
