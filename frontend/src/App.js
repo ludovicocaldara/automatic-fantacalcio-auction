@@ -183,13 +183,12 @@ function App() {
       const parsed = JSON.parse(saved);
       setBets(parsed.bets || BETS_INITIAL);
       setRoles(parsed.roles || ROLES_INITIAL);
+      setGkOrder(parsed.gkOrder || Object.keys(playersData.gk));
       setSelections(parsed.selections || { gk: [], def: [], cen: [], att: [] });
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('fantacalcioSelection', JSON.stringify({ bets, roles, selections }));
-  }, [bets, roles, selections]);
+
 
   const totalBets = bets.reduce((a, b) => a + b, 0);
   const remaining = TOTAL_BUDGET - totalBets;
@@ -200,6 +199,13 @@ function App() {
     const newTotal = newBets.reduce((a, b) => a + b, 0);
     if (newTotal <= TOTAL_BUDGET) {
       setBets(newBets);
+      const currentData = {
+        bets: newBets,
+        roles,
+        gkOrder,
+        selections
+      };
+      localStorage.setItem('fantacalcioSelection', JSON.stringify(currentData));
     }
   };
 
@@ -209,7 +215,15 @@ function App() {
       setBets((items) => {
         const oldIndex = items.findIndex((i) => i.id === active.id);
         const newIndex = items.findIndex((i) => i.id === over.id);
-        return arrayMove(items, oldIndex, newIndex);
+        const newBets = arrayMove(items, oldIndex, newIndex);
+        const currentData = {
+          bets: newBets,
+          roles,
+          gkOrder,
+          selections
+        };
+        localStorage.setItem('fantacalcioSelection', JSON.stringify(currentData));
+        return newBets;
       });
     }
   };
@@ -220,7 +234,15 @@ function App() {
       setRoles((items) => {
         const oldIndex = active.id;
         const newIndex = over.id;
-        return arrayMove(items, oldIndex, newIndex);
+        const newRoles = arrayMove(items, oldIndex, newIndex);
+        const currentData = {
+          bets,
+          roles: newRoles,
+          gkOrder,
+          selections
+        };
+        localStorage.setItem('fantacalcioSelection', JSON.stringify(currentData));
+        return newRoles;
       });
     }
   };
@@ -231,7 +253,15 @@ function App() {
       setGkOrder((items) => {
         const oldIndex = items.indexOf(active.id);
         const newIndex = items.indexOf(over.id);
-        return arrayMove(items, oldIndex, newIndex);
+        const newGkOrder = arrayMove(items, oldIndex, newIndex);
+        const currentData = {
+          bets,
+          roles,
+          gkOrder: newGkOrder,
+          selections
+        };
+        localStorage.setItem('fantacalcioSelection', JSON.stringify(currentData));
+        return newGkOrder;
       });
     }
   };
@@ -240,13 +270,29 @@ function App() {
     const role = roles[0]; // Assume first role for simplicity; in full impl, match to role
     if (role === 'P') {
       if (!selections.gk.includes(team)) {
-        setSelections({ ...selections, gk: [...selections.gk, team] });
+        const newSelections = { ...selections, gk: [...selections.gk, team] };
+        setSelections(newSelections);
+        const currentData = {
+          bets,
+          roles,
+          gkOrder,
+          selections: newSelections
+        };
+        localStorage.setItem('fantacalcioSelection', JSON.stringify(currentData));
         // Remove team from available? But since GK is team, not individual
       }
     } else {
       const key = role.toLowerCase();
       if (!selections[key].includes(player.Nome)) {
-        setSelections({ ...selections, [key]: [...selections[key], player.Nome] });
+        const newSelections = { ...selections, [key]: [...selections[key], player.Nome] };
+        setSelections(newSelections);
+        const currentData = {
+          bets,
+          roles,
+          gkOrder,
+          selections: newSelections
+        };
+        localStorage.setItem('fantacalcioSelection', JSON.stringify(currentData));
         // Remove from available
         setAvailablePlayers(prev => ({
           ...prev,
@@ -260,10 +306,20 @@ function App() {
     const { active, over } = event;
     if (active.id !== over.id) {
       const key = role.toLowerCase();
-      setSelections(prev => ({
-        ...prev,
-        [key]: arrayMove(prev[key], active.id, over.id)
-      }));
+      setSelections(prev => {
+        const newSelections = {
+          ...prev,
+          [key]: arrayMove(prev[key], active.id, over.id)
+        };
+        const currentData = {
+          bets,
+          roles,
+          gkOrder,
+          selections: newSelections
+        };
+        localStorage.setItem('fantacalcioSelection', JSON.stringify(currentData));
+        return newSelections;
+      });
     }
   };
 
@@ -272,7 +328,8 @@ function App() {
       name: 'participant',
       bets,
       roles,
-      selections,
+      gkOrder,
+      availablePlayers,
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -291,6 +348,7 @@ function App() {
         const parsed = JSON.parse(event.target.result);
         setBets(parsed.bets || BETS_INITIAL);
         setRoles(parsed.roles || ROLES_INITIAL);
+        setGkOrder(parsed.gkOrder || Object.keys(playersData.gk));
         setSelections(parsed.selections || selections);
       };
       reader.readAsText(file);
