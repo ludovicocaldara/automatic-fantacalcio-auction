@@ -43,5 +43,4 @@ python auction.py --input-folder /path/to/folder --seed 42
 - When multiple tied highest bets exist:
   - If their desired players (top choice for the role) are different, all those participants win simultaneously.
   - If two or more desire the same player/team, the winner is randomly chosen among the tied participants with the lowest "favorited" counter (a fairness counter). The winner's counter is incremented.
-
-If you want changes to tie-breaking rules, printing verbosity or the input parsing rules, tell me and I will update the script.
+  - 
