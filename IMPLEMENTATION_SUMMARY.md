@@ -3,7 +3,9 @@
 ## ✅ Completion Status: ALL REQUIREMENTS IMPLEMENTED
 
 ### Overview
+
 A complete React-based fantasy football auction system with:
+
 - Modern, interactive frontend for participant selection management
 - Enhanced Python backend supporting both Excel and JSON input formats
 - Automatic data persistence and import/export functionality
@@ -51,7 +53,7 @@ A complete React-based fantasy football auction system with:
 - **Modern Gradients**: Purple-to-pink gradient backgrounds
 - **Responsive Grid Layout**: Works on desktop, tablet, mobile
 - **Smooth Animations**: Transitions and transforms for better UX
-- **Color-Coded Interface**: 
+- **Color-Coded Interface**:
   - Purple/Blue for bets
   - Pink/Red for roles
   - Different colors for each role (A/C/D/P)
@@ -143,16 +145,19 @@ A complete React-based fantasy football auction system with:
 ## 🔧 Configuration & Defaults
 
 ### Bet Defaults
+
 ```python
 [100, 80, 50, 40, 30, 30, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 5, 3, 1, 1]
 ```
 
 ### Role Defaults (4-3-3 Base + Reserves)
+
 ```python
 ['A', 'A', 'A', 'C', 'C', 'C', 'D', 'D', 'D', 'D', 'P', 'A', 'A', 'A', 'C', 'C', 'C', 'C', 'C', 'D', 'D', 'D', 'D']
 ```
 
 ### Team Composition Targets
+
 - Goalkeepers (P): 3
 - Defenders (D): 8
 - Centrals (C): 8
@@ -160,6 +165,7 @@ A complete React-based fantasy football auction system with:
 - **Total**: 25 players
 
 ### Budget
+
 - Maximum total bets: 600 credits
 - Enforced at UI level with real-time validation
 
@@ -170,11 +176,13 @@ A complete React-based fantasy football auction system with:
 ### Initial Setup
 
 1. Generate player data:
+
    ```bash
    python parse_players.py
    ```
 
 2. Install frontend dependencies:
+
    ```bash
    cd frontend
    npm install
@@ -207,6 +215,7 @@ python auction.py --input-folder /path/to/selections --seed 42
 ## ✨ Key Features Implemented
 
 ✅ **Frontend Features**
+
 - [x] Team name input field
 - [x] Bet list with ±1, ±10 controls
 - [x] Bet ordering enforcement
@@ -224,6 +233,7 @@ python auction.py --input-folder /path/to/selections --seed 42
 - [x] Modern gradient UI with smooth animations
 
 ✅ **Backend Features**
+
 - [x] Excel (.xlsx) input support (existing)
 - [x] JSON (.json) input support (new)
 - [x] File format auto-detection
@@ -232,6 +242,7 @@ python auction.py --input-folder /path/to/selections --seed 42
 - [x] Input validation
 
 ✅ **Data Management**
+
 - [x] CSV to JSON conversion
 - [x] Player data pre-population
 - [x] Default bets and roles
@@ -242,7 +253,7 @@ python auction.py --input-folder /path/to/selections --seed 42
 
 ## 📁 File Structure
 
-```
+```text
 /
 ├── auction.py                    # Enhanced with JSON support
 ├── parse_players.py              # CSV → JSON converter

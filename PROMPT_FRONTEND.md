@@ -46,7 +46,7 @@ When browsed from a desktop I want:
   - The rest of (600-sum(tile values)) is shown on a counter below the list ("Remaining credits".)
 - The players lists per role are displayed below the two lists above.
 
-- The players lists and the role list are shown as tiles and can be ordered using drag&drop. (This library looks great for that: https://clauderic.github.io/react-sortable-hoc/#/basic-configuration/basic-usage?_k=f59xkg)
+- The players lists and the role list are shown as tiles and can be ordered using drag&drop.
 - For the sortable lists, on the left of each tile there's a number that shows the actual ranking in that list.
   - e.g. I can have:
     - 1. name1

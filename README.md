@@ -10,6 +10,7 @@ A complete fantasy football auction system with both a modern React frontend for
 ## Features
 
 ### Frontend
+
 - 🎯 Interactive bet management with constraints (max 600 credits, ordering rules)
 - 🎭 Drag-and-drop reordering of roles and players
 - 💾 Automatic local storage persistence (no backend needed)
@@ -18,6 +19,7 @@ A complete fantasy football auction system with both a modern React frontend for
 - ⚡ Real-time validation and UI feedback
 
 ### Backend
+
 - ✅ Supports both Excel (.xlsx) and JSON (.json) input formats
 - 🎲 Fair tie-breaking with "favorited counter" system
 - 📊 Detailed auction logs and final team reports
@@ -25,11 +27,13 @@ A complete fantasy football auction system with both a modern React frontend for
 
 ## Requirements
 
-### Frontend
+### Frontend Requirements
+
 - Node.js 14+
 - npm or yarn
 
-### Backend
+### Backend Requirements
+
 - Python 3.8+
 - pandas, openpyxl, numpy
 
@@ -59,6 +63,7 @@ npm start
 ```
 
 The frontend will open at `http://localhost:3000`. Participants can:
+
 1. Enter their team name
 2. Adjust bet values (±1, ±10 buttons)
 3. Reorder roles by dragging
@@ -98,6 +103,7 @@ Place `<participant>.json` files in a folder:
 
 **Option 2: Excel files** (legacy format)
 Each file must have a sheet named "Offerta" with columns:
+
 - B: bet (numeric)
 - D: role (A/C/D/P)
 - F: goalkeeper selection (team names)
@@ -113,7 +119,7 @@ python auction.py --input-folder /path/to/participants --seed 42
 
 ## Project Structure
 
-```
+```text
 /
 ├── auction.py                 # Main auction script
 ├── parse_players.py          # CSV to JSON converter
@@ -159,11 +165,13 @@ python auction.py --input-folder /path/to/participants --seed 42
 ## Troubleshooting
 
 ### Frontend won't load
+
 - Clear browser cache and localStorage
 - Check that `public/players-data.json` exists
 - Run `python parse_players.py` to regenerate
 
 ### Auction errors
+
 - Verify JSON files have correct format
 - Check that player names/teams match CSV exactly
 - Use `--seed` parameter for reproducible results

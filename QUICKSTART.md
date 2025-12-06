@@ -3,16 +3,19 @@
 ## Getting Started with the Fantacalcio Auction Frontend
 
 ### Prerequisites
+
 - Modern web browser (Chrome, Firefox, Safari, Edge)
 - Node.js 14+ and npm (for development)
 
 ### Quick Start - Using the Frontend
 
 1. **Start the Frontend Development Server**
+
    ```bash
    cd frontend
    npm start
    ```
+
    The app will open automatically at `http://localhost:3000`
 
 2. **Enter Your Team Name**
@@ -54,6 +57,7 @@ Once all participants have downloaded their selections:
 1. **Collect JSON files** from all participants in a folder
 
 2. **Run the auction:**
+
    ```bash
    python auction.py --input-folder /path/to/selections --seed 42
    ```
@@ -66,18 +70,21 @@ Once all participants have downloaded their selections:
 ## Features Explained
 
 ### Bet Management
+
 - **Maximum Total**: 600 credits
 - **Ordering Rule**: You can't make a lower bet higher than a higher bet
-- **Increment Buttons**: 
+- **Increment Buttons**:
   - `-10`, `-1`: Decrease by 10 or 1
   - `+1`, `+10`: Increase by 1 or 10
 
 ### Drag and Drop
+
 - **Roles**: Reorder which roles you prioritize
 - **Players**: Reorder players within each role
 - The number on the left shows the current ranking
 
 ### Data Persistence
+
 - Selection is saved to browser localStorage
 - No backend server needed
 - Data persists across browser sessions
@@ -98,16 +105,19 @@ Once all participants have downloaded their selections:
 ## Troubleshooting
 
 ### My changes aren't saving
+
 - Check that your browser allows localStorage
 - Clear browser cache and try again
 - Use a different browser if issues persist
 
 ### Players list is empty
+
 - Make sure `parse_players.py` has been run
 - Check that CSV files are in the root directory
 - Refresh the page
 
 ### Import isn't working
+
 - Verify the JSON file is from a valid export
 - Check file format matches expected structure
 - Try downloading and reimporting to validate

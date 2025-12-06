@@ -22,7 +22,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const loadPlayersData = async () => {
       try {
-        const response = await fetch('/players-data.json');
+        const response = await fetch('players-data.json');
         if (!response.ok) throw new Error('Failed to load players data');
         const data: PlayersData = await response.json();
         setPlayersData(data);
