@@ -1,257 +1,202 @@
-.App {
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.app.loading,
+.app.error {
+  justify-content: center;
+  align-items: center;
+  color: white;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.loader {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid white;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(8px + 1.5vmin);
-  color: white;
-  padding: 10px;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
+@keyframes spin {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(360deg);
   }
 }
 
-.player-tile {
-  border-radius: 4px;
-  padding: 5px;
-  margin: 2px;
-  cursor: pointer;
-  display: inline-block;
-  min-width: 150px;
-  text-align: left;
-  font-size: 12px;
-  transition: background-color 0.2s;
+.app-header {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 30px 40px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
 
-.player-tile:hover {
-  opacity: 0.8;
+.app-header h1 {
+  margin: 0 0 20px 0;
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
 }
 
-.player-tile.gk {
-  background-color: #4a90e2;
-  border: 1px solid #4a90e2;
-}
-
-.player-tile.def {
-  background-color: #4caf50;
-  border: 1px solid #4caf50;
-}
-
-.player-tile.cen {
-  background-color: #ff9800;
-  border: 1px solid #ff9800;
-}
-
-.player-tile.att {
-  background-color: #f44336;
-  border: 1px solid #f44336;
-}
-
-.team-list, .gk-teams {
-  background-color: #3a3a3a;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px;
-  min-width: 250px;
-}
-
-.team-gk {
-  background-color: #4a4a4a;
-  border: 1px solid #61dafb;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 5px;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-.team-gk:hover, .team-gk.selected {
-  border-color: #21a1f1;
-  background-color: #5a5a5a;
-}
-
-.top-gk {
-  font-size: 14px;
-  color: #61dafb;
-}
-
-.sortable-player, .sortable-bet, .sortable-role, .sortable-team {
-  margin: 5px 0;
-}
-
-.bet-input {
+.team-name-section {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-
-.bet-input button {
-  background-color: #61dafb;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.bet-input button:disabled {
-  background-color: #555;
-  cursor: not-allowed;
-}
-
-.bet-value {
-  width: 60px;
-  text-align: center;
-  border: 1px solid #61dafb;
-  border-radius: 4px;
-  background-color: #282c34;
-  color: white;
-  padding: 5px;
-  display: inline-block;
-  cursor: grab;
-}
-
-.role-tile {
-  width: 40px;
-  text-align: center;
-  border: 1px solid #61dafb;
-  border-radius: 4px;
-  background-color: #282c34;
-  color: white;
-  padding: 5px;
-  display: inline-block;
-  cursor: grab;
-}
-
-.team-tile {
-  border: 1px solid #4a90e2;
-  border-radius: 4px;
-  background-color: #4a90e2;
-  color: white;
-  padding: 5px;
-  margin: 2px;
-  cursor: pointer;
-  display: inline-block;
-  min-width: 100px;
-  text-align: center;
-  font-size: 12px;
-  transition: background-color 0.2s;
-}
-
-.team-tile:hover {
-  opacity: 0.8;
-}
-
-.main-content {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: center;
+  gap: 15px;
   flex-wrap: wrap;
-}
-
-.player-sections {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
   justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 10px;
 }
 
-.selection-sections {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.selection-list {
-  background-color: #3a3a3a;
+.team-name-input {
+  flex: 1;
+  min-width: 250px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #e0e0e0;
   border-radius: 8px;
-  padding: 5px;
-  min-width: 150px;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
-.selection-list.gk {
-  border: 2px solid #4a90e2;
+.team-name-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.selection-list.def {
-  border: 2px solid #4caf50;
+.action-buttons {
+  display: flex;
+  gap: 10px;
 }
 
-.selection-list.cen {
-  border: 2px solid #ff9800;
-}
-
-.selection-list.att {
-  border: 2px solid #f44336;
-}
-
-.selected-player {
-  background-color: #61dafb;
-  border-radius: 4px;
-  padding: 5px;
-  margin: 5px 0;
-  color: #282c34;
-}
-
-.controls {
-  margin: 20px 0;
-}
-
-button {
-  background-color: #61dafb;
+.btn {
+  padding: 12px 24px;
+  font-size: 1rem;
   border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  color: #282c34;
+  border-radius: 8px;
   cursor: pointer;
-  margin: 0 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
 }
 
-button:hover {
-  background-color: #21a1f1;
+.btn-download {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
 }
 
-h2, h3, h4 {
-  color: #61dafb;
-  font-size: 14px;
+.btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-.total {
-  font-size: 18px;
-  font-weight: bold;
-  color: #61dafb;
-  margin-top: 10px;
+.btn-import {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
 }
+
+.btn-import:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.bets-roles-section {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .bets-roles-section {
+    flex-direction: column;
+  }
+
+  .app-header {
+    padding: 20px 25px;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .team-name-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .team-name-input {
+    min-width: 100%;
+  }
+
+  .action-buttons {
+    justify-content: stretch;
+  }
+
+  .btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+.players-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 12px;
+  }
+
+  .app-header {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .players-section {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+

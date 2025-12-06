@@ -1,0 +1,81 @@
+.role-list {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.role-list h3 {
+  margin: 0 0 20px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.roles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.role-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: grab;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.role-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.role-item:active {
+  cursor: grabbing;
+}
+
+.role-index {
+  font-weight: 700;
+  font-size: 1.1rem;
+  min-width: 30px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.role-badge {
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  min-width: 40px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.role-label {
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+.drag-handle {
+  color: rgba(255, 255, 255, 0.6);
+  cursor: grab;
+  font-size: 1.2rem;
+  letter-spacing: -3px;
+}
+
+.role-item:active .drag-handle {
+  cursor: grabbing;
+}

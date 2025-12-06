@@ -2,9 +2,9 @@
 """
 Automated fantasy football auction as specified in prompt.txt
 
-Reads Excel files named <participant>.xlsx in the given folder. Each file must
-have a sheet named 'Offerta' with the following columns (Excel columns):
+Reads Excel files named <participant>.xlsx or JSON files named <participant>.json in the given folder. 
 
+For Excel files, each file must have a sheet named 'Offerta' with the following columns (Excel columns):
 B: bet (numeric)
 D: role (A/C/D/P)
 F: goalkeeper selection (team names)
@@ -12,10 +12,22 @@ H: defender selection (player names)
 J: central selection (player names)
 L: striker selection (player names)
 
+For JSON files, the format is:
+{
+  "teamName": "string",
+  "bets": [number],
+  "roles": ["A"|"C"|"D"|"P"],
+  "goalkeepers": [string],
+  "defenders": [string],
+  "centrals": [string],
+  "strikers": [string]
+}
+
 Outputs iteration logs and final teams to stdout.
 """
 
 import argparse
+import json
 import os
 import random
 from collections import defaultdict, deque
@@ -140,7 +152,7 @@ class Participant:
         return False
 
 def read_participants_from_folder(folder):
-    '''read participant Excel files from the given folder and return list of Participant objects'''
+    '''read participant Excel and JSON files from the given folder and return list of Participant objects'''
     participants = []
 
     def get_col_data(df, col):
@@ -148,20 +160,40 @@ def read_participants_from_folder(folder):
         cleaned = [str(x).strip() for x in vals if not pd.isna(x)]
         return cleaned
 
-    for fname in os.listdir(folder):
-        if fname.startswith('~') or not fname.lower().endswith('.xlsx'):
-            continue
-        path = os.path.join(folder, fname)
-        name = os.path.splitext(fname)[0]
+    def read_from_json(path, name):
+        '''read participant data from JSON file'''
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            # Validate required fields
+            required_fields = ['bets', 'roles', 'goalkeepers', 'defenders', 'centrals', 'strikers']
+            if not all(field in data for field in required_fields):
+                print(f"Warning: {name} JSON missing required fields. Skipping.")
+                return None
+            
+            bets = data.get('bets', [])
+            roles = [r.upper() for r in data.get('roles', [])]
+            gk = data.get('goalkeepers', [])
+            defs = data.get('defenders', [])
+            cens = data.get('centrals', [])
+            atts = data.get('strikers', [])
+            
+            return Participant(name, bets, roles, gk, defs, cens, atts)
+        except Exception as e:
+            print(f"Failed to read JSON {path}: {e}")
+            return None
+
+    def read_from_xlsx(path, name):
+        '''read participant data from Excel file'''
         try:
             # Read specific columns by position: B=1, D=3, F=5, H=7, J=9, L=11 (0-based)
             df = pd.read_excel(path, sheet_name='Offerta', usecols=[1,3,5,7,9,11], skiprows=1, header=None, engine='openpyxl')
             df.columns = range(len(df.columns))
-            print(f"Debug for {name}: columns={df.columns.tolist()}, shape={df.shape}")
-            print(df.head())
         except Exception as e:
             print(f"Failed to read {path}: {e}")
-            continue
+            return None
+        
         # bets: try to parse numbers; empty or non-numeric entries removed
         raw_bets = get_col_data(df, 0)
         bets = []
@@ -183,7 +215,24 @@ def read_participants_from_folder(folder):
         cens = get_col_data(df, 4)
         atts = get_col_data(df, 5)
 
-        participants.append(Participant(name, bets, roles, gk, defs, cens, atts))
+        return Participant(name, bets, roles, gk, defs, cens, atts)
+
+    for fname in os.listdir(folder):
+        if fname.startswith('~'):
+            continue
+        
+        path = os.path.join(folder, fname)
+        name = os.path.splitext(fname)[0]
+        
+        if fname.lower().endswith('.json'):
+            participant = read_from_json(path, name)
+            if participant:
+                participants.append(participant)
+        elif fname.lower().endswith('.xlsx'):
+            participant = read_from_xlsx(path, name)
+            if participant:
+                participants.append(participant)
+    
     return participants
 
 
